@@ -1,0 +1,1139 @@
+{
+  "language": "en",
+  "source_note": "Best-effort extraction from provided menu images. Some names/descriptions may need verification against the original PDF.",
+  "currency": "EGP",
+  "categories": [
+    {
+      "name": "Desserts",
+      "items": [
+        {
+          "name": "Layali Lebanon Muhallebiya",
+          "price": 57
+        },
+        {
+          "name": "Nougat Cream",
+          "price": 76
+        },
+        {
+          "name": "Halawet El Jibn",
+          "price": 95
+        },
+        {
+          "name": "مكمل/مكمّل مد قشطة",
+          "price": 170,
+          "uncertain": true
+        },
+        {
+          "name": "Othmalia with Cream",
+          "price": 135
+        },
+        {
+          "name": "عثمانية بلايس",
+          "price": 95,
+          "uncertain": true
+        },
+        {
+          "name": "Beirut Ghazl",
+          "price": 170
+        },
+        {
+          "name": "Nabulsiya",
+          "price": 170
+        },
+        {
+          "name": "Om Ali",
+          "price": 120
+        },
+        {
+          "name": "Naam Lava",
+          "price": 135
+        },
+        {
+          "name": "فستروت سلا/سلاد",
+          "price": 95,
+          "uncertain": true
+        },
+        {
+          "name": "Naam Crepe",
+          "price": 165
+        },
+        {
+          "name": "Float Crepe",
+          "price": 165
+        },
+        {
+          "name": "Fettuccine Crepe",
+          "price": 125
+        },
+        {
+          "name": "Crepe Rolls",
+          "price": 155
+        },
+        {
+          "name": "Classic Waffle",
+          "price": 125
+        },
+        {
+          "name": "Chocolate Pancake",
+          "price": 145
+        }
+      ],
+      "addons": [
+        {
+          "name": "Pistachio",
+          "price": 55
+        },
+        {
+          "name": "Lotus",
+          "price": 55
+        },
+        {
+          "name": "Nutella",
+          "price": 50
+        },
+        {
+          "name": "Chocolate Spread",
+          "price": 50
+        }
+      ]
+    },
+    {
+      "name": "Grills",
+      "items": [
+        {
+          "name": "ميكس جريل 300 جرام",
+          "price": 430
+        },
+        {
+          "name": "هفيس جريل نعم 450 جرام",
+          "price": 495,
+          "uncertain": true
+        },
+        {
+          "name": "شيش فراخ 300 جرام",
+          "price": 530
+        },
+        {
+          "name": "كفتة قبرص 300 جرام",
+          "price": 530
+        },
+        {
+          "name": "كفتة نعم بيروت 300 جرام",
+          "price": 395
+        },
+        {
+          "name": "كفتة أرزلي 300 جرام",
+          "price": 375,
+          "uncertain": true
+        },
+        {
+          "name": "كفتة لبناني 300 جرام",
+          "price": 355
+        },
+        {
+          "name": "كفتة سيخ 300 جرام",
+          "price": 335
+        },
+        {
+          "name": "كفتة خشخاش 300 جرام",
+          "price": 360
+        },
+        {
+          "name": "كفتة فِرَاك/فراخ 300 جرام",
+          "price": 280,
+          "uncertain": true
+        },
+        {
+          "name": "شيش حلوم نعم 300 جرام",
+          "price": 325
+        },
+        {
+          "name": "شيش حلوم بالجبنة 300 جرام",
+          "price": 335
+        },
+        {
+          "name": "شيش طاووق 300 جرام",
+          "price": 305
+        },
+        {
+          "name": "مسحب رنت",
+          "price": 280,
+          "uncertain": true
+        },
+        {
+          "name": "فراخ عالمية",
+          "price": 255
+        }
+      ],
+      "note": "جميع الأطباق تقدم مع اختيار من: بطاطا، أرز، خضار سوتيه، بريك، أو أرز شرقي بالخلطة"
+    },
+    {
+      "name": "Beirut Combo Meals",
+      "items": [
+        {
+          "name": "Meal 1",
+          "price": 295,
+          "description": "سيخ كفتة + ربع فرخة + أرز بسمتي + فتوش + طحينة + خبز"
+        },
+        {
+          "name": "Meal 2",
+          "price": 295,
+          "description": "2 سيخ كفتة لحم + 1 سيخ كفتة فراخ + أرز بسمتي + فتوش + طحينة + خبز"
+        },
+        {
+          "name": "Meal 3",
+          "price": 295,
+          "description": "6 قطع شيش طاووق + أرز بسمتي + فتوش + طحينة + خبز"
+        },
+        {
+          "name": "Meal 4",
+          "price": 295,
+          "description": "2 سيخ كفتة + 3 قطع شيش طاووق + أرز بسمتي + فتوش + طحينة + خبز"
+        }
+      ]
+    },
+    {
+      "name": "Hot Appetizers",
+      "items": [
+        {
+          "name": "رأس عصفور بدبس الرمان",
+          "price": 176
+        },
+        {
+          "name": "سودة دجاج بدبس الرمان",
+          "price": 165
+        },
+        {
+          "name": "متانق بدبس الرمان",
+          "price": 195
+        },
+        {
+          "name": "بطاطا حارة بالكزبرة",
+          "price": 102
+        },
+        {
+          "name": "حمص باللحم",
+          "price": 195
+        },
+        {
+          "name": "حمص بالكفتة",
+          "price": 330
+        },
+        {
+          "name": "سودة نعم",
+          "price": 165
+        },
+        {
+          "name": "سجق لبناني",
+          "price": 176
+        },
+        {
+          "name": "كبة مقلية",
+          "price": 165
+        },
+        {
+          "name": "رقائق جبنة",
+          "price": 108
+        },
+        {
+          "name": "سمبوسك لحم",
+          "price": 125
+        },
+        {
+          "name": "حلوم ريحان",
+          "price": 153
+        }
+      ],
+      "combo": {
+        "name": "Naam Appetizer Mix",
+        "price": 275
+      }
+    },
+    {
+      "name": "Cold Appetizers",
+      "items": [
+        {
+          "name": "Hummus",
+          "price": 85
+        },
+        {
+          "name": "Beiruti Hummus",
+          "price": 95
+        },
+        {
+          "name": "Hummus with Lemon",
+          "price": 95
+        },
+        {
+          "name": "Cold Appetizer Mix",
+          "price": 200
+        },
+        {
+          "name": "Mixed Pickles",
+          "price": 45
+        },
+        {
+          "name": "Makdous",
+          "price": 65
+        },
+        {
+          "name": "Stuffed Vine Leaves",
+          "price": 120
+        },
+        {
+          "name": "Moussaka",
+          "price": 91
+        },
+        {
+          "name": "Muhammara",
+          "price": 85
+        }
+      ]
+    },
+    {
+      "name": "Egyptian Dishes",
+      "items": [
+        {
+          "name": "Molokhia Plain",
+          "price": 96
+        },
+        {
+          "name": "Potatoes Plain",
+          "price": 96
+        },
+        {
+          "name": "Okra Plain",
+          "price": 110
+        },
+        {
+          "name": "Stuffed Vine Leaves",
+          "price": 150
+        },
+        {
+          "name": "Sausage Casserole",
+          "price": 190
+        },
+        {
+          "name": "Potatoes with Meat",
+          "price": 210
+        },
+        {
+          "name": "Molokhia with Meat",
+          "price": 210
+        },
+        {
+          "name": "Okra with Meat",
+          "price": 225
+        },
+        {
+          "name": "Spicy Liver Casserole",
+          "price": 205
+        },
+        {
+          "name": "Vine Leaves with Trotters",
+          "price": 350
+        },
+        {
+          "name": "Egyptian Trotter Fattah",
+          "price": 315
+        },
+        {
+          "name": "Vine Leaves with Lamb Shank",
+          "price": 450
+        },
+        {
+          "name": "Vine Leaves with Meat",
+          "price": 450
+        },
+        {
+          "name": "Lamb Shank Tagine with Onion",
+          "price": 450
+        },
+        {
+          "name": "Egyptian Lamb Shank Fattah",
+          "price": 450
+        }
+      ]
+    },
+    {
+      "name": "Pasta",
+      "items": [
+        {
+          "name": "طاجن مكرونة صوص أحمر",
+          "price": 95
+        },
+        {
+          "name": "طاجن مكرونة صوص أبيض",
+          "price": 110
+        },
+        {
+          "name": "طاجن مكرونة بشاميل",
+          "price": null
+        },
+        {
+          "name": "طاجن مكرونة بالفراخ",
+          "price": null
+        },
+        {
+          "name": "طاجن مكرونة بالسجق",
+          "price": 185
+        }
+      ]
+    },
+    {
+      "name": "Shisha",
+      "items": [
+        {
+          "name": "Premium Shisha",
+          "price": 90
+        },
+        {
+          "name": "Premium Mix Shisha",
+          "price": 100
+        },
+        {
+          "name": "لاكي طيبي",
+          "price": 25,
+          "uncertain": true
+        }
+      ]
+    },
+    {
+      "name": "Breakfast",
+      "items": [
+        {
+          "name": "Foul with Chickpeas",
+          "price": 65
+        },
+        {
+          "name": "Foul with Vegetables",
+          "price": 65
+        },
+        {
+          "name": "Foul with Sausage",
+          "price": 125
+        },
+        {
+          "name": "Lebanese Falafel",
+          "price": 65
+        },
+        {
+          "name": "Fried Eggs",
+          "price": 75
+        },
+        {
+          "name": "Eggs with Sausage",
+          "price": 125
+        },
+        {
+          "name": "Eggs with Spinach and Minced Meat",
+          "price": 125
+        },
+        {
+          "name": "Omelet with Green Onion",
+          "price": 75
+        },
+        {
+          "name": "Cheese with Zaatar",
+          "price": 55
+        },
+        {
+          "name": "Cheese with Labneh",
+          "price": 55
+        },
+        {
+          "name": "Honey with Tahini",
+          "price": 55
+        },
+        {
+          "name": "Honey with Cream",
+          "price": 75
+        }
+      ]
+    },
+    {
+      "name": "Breakfast Meals",
+      "items": [
+        {
+          "name": "Egyptian Breakfast Meal",
+          "price": 155,
+          "description": "فول إسكندراني، 2 بيضه، 2 فلافل، بطاطس مقلية، جبنة بالطماطم والزعتر، سلطة خضراء، متبل، حمص"
+        },
+        {
+          "name": "Lebanese Breakfast Meal",
+          "price": 180,
+          "description": "فول بالخضرة، 4 فلافل، جبنة بالمشمولة، جبنة حلوم، أرجان، ميني مناقيش، حمص بالليمون، محمرة",
+          "uncertain": true
+        }
+      ]
+    },
+    {
+      "name": "Main Courses",
+      "items": [
+        {
+          "name": "Chicken Fillet",
+          "price": 250
+        },
+        {
+          "name": "Chicken Fattah",
+          "price": 320
+        },
+        {
+          "name": "Lamb Shank Fattah with Yogurt",
+          "price": 440
+        },
+        {
+          "name": "Chickpea & Pine Nut Fattah",
+          "price": 210
+        },
+        {
+          "name": "Eggplant Fattah with Chickpeas",
+          "price": 180
+        },
+        {
+          "name": "Tahini Sahnah",
+          "price": 330
+        },
+        {
+          "name": "Yogurt Sahnah",
+          "price": 330
+        },
+        {
+          "name": "صاجين سجق",
+          "price": 225,
+          "uncertain": true
+        },
+        {
+          "name": "Stuffed Zucchini with Yogurt",
+          "price": 196
+        },
+        {
+          "name": "Kibbeh Labanieh",
+          "price": 220
+        },
+        {
+          "name": "Sheikh El Mahshi",
+          "price": 180
+        },
+        {
+          "name": "Maqlooba with Chickpeas",
+          "price": 380
+        },
+        {
+          "name": "Chicken Maqlooba",
+          "price": 330
+        },
+        {
+          "name": "Freekeh with Lamb Shank",
+          "price": 430
+        },
+        {
+          "name": "Freekeh with Chicken",
+          "price": 280
+        },
+        {
+          "name": "Freekeh with Liver",
+          "price": 205
+        }
+      ]
+    },
+    {
+      "name": "Side Dishes",
+      "items": [
+        {
+          "name": "French Fries",
+          "price": 80
+        },
+        {
+          "name": "Zinger Fries",
+          "price": 75
+        },
+        {
+          "name": "Sauteed Vegetables",
+          "price": 90
+        },
+        {
+          "name": "Briq",
+          "price": 80
+        },
+        {
+          "name": "White Basmati Rice",
+          "price": 70
+        },
+        {
+          "name": "Rice with Vermicelli",
+          "price": 65
+        },
+        {
+          "name": "Oriental Rice with Mix",
+          "price": 90
+        },
+        {
+          "name": "وجبة أطفال بانية",
+          "price": null,
+          "description": "قطعتين بانية مع البطاطس والرز"
+        },
+        {
+          "name": "وجبة أطفال جريل",
+          "price": null,
+          "description": "قطعة كفتة وقطعتين شيش مع البطاطس والرز"
+        }
+      ]
+    },
+    {
+      "name": "Cold Drinks",
+      "items": [
+        {
+          "name": "Iced Latte",
+          "price": 95
+        },
+        {
+          "name": "Iced Mocha",
+          "price": 99
+        },
+        {
+          "name": "Iced Spanish Latte",
+          "price": 99
+        },
+        {
+          "name": "Frappuccino",
+          "price": 99
+        },
+        {
+          "name": "Frappe",
+          "price": 99
+        },
+        {
+          "name": "Pistachio Milkshake",
+          "price": 120
+        },
+        {
+          "name": "Lotus Milkshake",
+          "price": 120
+        },
+        {
+          "name": "Oreo Milkshake",
+          "price": 110
+        },
+        {
+          "name": "Mango Milkshake",
+          "price": 110
+        },
+        {
+          "name": "Strawberry Milkshake",
+          "price": 110
+        },
+        {
+          "name": "Chocolate Milkshake",
+          "price": 105
+        },
+        {
+          "name": "Vanilla Milkshake",
+          "price": 105
+        },
+        {
+          "name": "هواي",
+          "price": 105
+        },
+        {
+          "name": "سلطان دار",
+          "price": 110
+        },
+        {
+          "name": "سبيشال كوكتيل",
+          "price": 99
+        },
+        {
+          "name": "بينك كوكتيل",
+          "price": 99
+        },
+        {
+          "name": "مانجو خض",
+          "price": 99
+        },
+        {
+          "name": "أفوكادو مانجو أو كيوي",
+          "price": 115
+        },
+        {
+          "name": "أفوكادو عسل ومكسرات",
+          "price": 135
+        },
+        {
+          "name": "أفوكادو قشطة ومكسرات",
+          "price": 135
+        }
+      ]
+    },
+    {
+      "name": "Iced Drinks",
+      "items": [
+        {
+          "name": "Smoothie",
+          "price": 95
+        },
+        {
+          "name": "Mojito",
+          "price": 95
+        },
+        {
+          "name": "Tropical",
+          "price": 85
+        },
+        {
+          "name": "Lemon Mint",
+          "price": 90
+        },
+        {
+          "name": "Cola",
+          "price": 85
+        },
+        {
+          "name": "ميكس بيري صودا",
+          "price": 95
+        },
+        {
+          "name": "Soft Drinks",
+          "price": 45
+        },
+        {
+          "name": "Small Mineral Water",
+          "price": 18
+        },
+        {
+          "name": "بيريل / فيروز",
+          "price": 55
+        },
+        {
+          "name": "Energy Drink",
+          "price": 90
+        }
+      ]
+    },
+    {
+      "name": "Fresh Juices",
+      "items": [
+        {
+          "name": "Mango",
+          "price": 95
+        },
+        {
+          "name": "Strawberry",
+          "price": 85
+        },
+        {
+          "name": "Guava",
+          "price": 85
+        },
+        {
+          "name": "Kiwi",
+          "price": 95
+        },
+        {
+          "name": "Watermelon",
+          "price": 85
+        },
+        {
+          "name": "Orange",
+          "price": 75
+        },
+        {
+          "name": "Lemon Mint",
+          "price": 75
+        }
+      ]
+    },
+    {
+      "name": "Hot Drinks",
+      "items": [
+        {
+          "name": "Espresso",
+          "price": 45
+        },
+        {
+          "name": "Double Espresso",
+          "price": 57
+        },
+        {
+          "name": "Macchiato",
+          "price": 57
+        },
+        {
+          "name": "Double Macchiato",
+          "price": 69
+        },
+        {
+          "name": "Espresso Affogato",
+          "price": 69
+        },
+        {
+          "name": "Espresso con Panna",
+          "price": 69
+        },
+        {
+          "name": "Cortado",
+          "price": 69
+        },
+        {
+          "name": "Cappuccino",
+          "price": 85
+        },
+        {
+          "name": "Hot Mocha",
+          "price": 76
+        },
+        {
+          "name": "Latte",
+          "price": 69
+        },
+        {
+          "name": "Spanish Latte",
+          "price": 76
+        },
+        {
+          "name": "Rose Latte",
+          "price": 76
+        },
+        {
+          "name": "Americano",
+          "price": 63
+        },
+        {
+          "name": "تراميل موكا",
+          "price": 79,
+          "uncertain": true
+        },
+        {
+          "name": "Hot Chocolate",
+          "price": 76
+        },
+        {
+          "name": "Hot Cider",
+          "price": 63
+        },
+        {
+          "name": "Add Flavor",
+          "price": 25
+        },
+        {
+          "name": "Cinnamon with Milk",
+          "price": 45
+        },
+        {
+          "name": "Turkish Coffee",
+          "price": 42
+        },
+        {
+          "name": "Double Coffee",
+          "price": 52
+        },
+        {
+          "name": "French Coffee",
+          "price": 63
+        },
+        {
+          "name": "Hazelnut Coffee",
+          "price": 69
+        },
+        {
+          "name": "Turkish Coffee with Mastic",
+          "price": 57
+        },
+        {
+          "name": "Tea",
+          "price": 36
+        },
+        {
+          "name": "Green Tea",
+          "price": 39
+        },
+        {
+          "name": "Flavored Tea",
+          "price": 39
+        },
+        {
+          "name": "Nescafe",
+          "price": 67
+        },
+        {
+          "name": "Anise",
+          "price": 39
+        },
+        {
+          "name": "Mint",
+          "price": 39
+        },
+        {
+          "name": "Herbal Mix",
+          "price": 45
+        },
+        {
+          "name": "Teapot Tea",
+          "price": 64
+        },
+        {
+          "name": "Karak Tea",
+          "price": 79
+        },
+        {
+          "name": "Sahlab with Nuts",
+          "price": 76
+        },
+        {
+          "name": "Milk Tea",
+          "price": 45
+        },
+        {
+          "name": "Add Milk",
+          "price": 25
+        }
+      ]
+    },
+    {
+      "name": "Soups",
+      "items": [
+        {
+          "name": "Cream of Mushroom Soup",
+          "price": 96
+        },
+        {
+          "name": "Cream of Chicken Soup",
+          "price": 108
+        },
+        {
+          "name": "Vegetable Soup",
+          "price": 85
+        },
+        {
+          "name": "Lentil Soup",
+          "price": 85
+        },
+        {
+          "name": "Orzo Soup",
+          "price": 74
+        },
+        {
+          "name": "Trotter Soup",
+          "price": 215
+        }
+      ]
+    },
+    {
+      "name": "Salads",
+      "items": [
+        {
+          "name": "Rocca",
+          "price": 68
+        },
+        {
+          "name": "Toumeya",
+          "price": 57
+        },
+        {
+          "name": "Eggplant Moutabal",
+          "price": 68
+        },
+        {
+          "name": "Tahini",
+          "price": 57
+        },
+        {
+          "name": "Naam Raheb",
+          "price": 91
+        },
+        {
+          "name": "Tabbouleh",
+          "price": 79
+        },
+        {
+          "name": "Labneh with Zaatar",
+          "price": 96
+        },
+        {
+          "name": "Naam Beirut Salad",
+          "price": 91
+        },
+        {
+          "name": "Beetroot",
+          "price": 79
+        },
+        {
+          "name": "Fattoush",
+          "price": 96
+        }
+      ]
+    },
+    {
+      "name": "Sandwiches & Shawarma",
+      "items": [
+        {
+          "name": "Beef Shawarma Sandwich",
+          "price": 175
+        },
+        {
+          "name": "Chicken Shawarma Sandwich",
+          "price": 150
+        },
+        {
+          "name": "Hot Chicken Sandwich",
+          "price": 176
+        },
+        {
+          "name": "Mini Sausage",
+          "price": 160
+        },
+        {
+          "name": "Mini Chicken Liver",
+          "price": 160
+        },
+        {
+          "name": "Mini Mixed Shawarma Bites",
+          "price": 165
+        },
+        {
+          "name": "Mini Naam Mix Bites",
+          "price": 175
+        },
+        {
+          "name": "Mini Beef Shawarma Bites",
+          "price": 175
+        },
+        {
+          "name": "Mini Chicken Shawarma Bites",
+          "price": 160
+        },
+        {
+          "name": "Chicken Pane Sandwich",
+          "price": 160
+        },
+        {
+          "name": "Kofta Sandwich",
+          "price": 175
+        },
+        {
+          "name": "Beef Shawarma Fattah",
+          "price": 295
+        },
+        {
+          "name": "Chicken Shawarma Fattah",
+          "price": 280
+        },
+        {
+          "name": "بوكس شاورما",
+          "price": 340,
+          "description": "شاورما + صاج + لمّة",
+          "uncertain": true
+        },
+        {
+          "name": "بوكس ميني سندوتش",
+          "price": 340,
+          "description": "قطع 12 + صاج + لمّة",
+          "uncertain": true
+        },
+        {
+          "name": "Chicken Shawarma Plate",
+          "price": 250
+        },
+        {
+          "name": "Beef Shawarma Plate",
+          "price": 368
+        }
+      ],
+      "note": "جميع السندوتشات تقدم مع بطاطس محمرة واختيارك من طحينة أو ثومية"
+    },
+    {
+      "name": "Manakeesh & Pastries",
+      "items": [
+        {
+          "name": "Lahm Bi Ajeen",
+          "price": 195
+        },
+        {
+          "name": "Meat Sfiha",
+          "price": 170
+        },
+        {
+          "name": "Halloumi Sfiha",
+          "price": 170
+        },
+        {
+          "name": "Sausage Sfiha",
+          "price": 170
+        },
+        {
+          "name": "Cheese Manakeesh",
+          "price": 150
+        },
+        {
+          "name": "Zaatar Manakeesh",
+          "price": 110
+        },
+        {
+          "name": "Vegetable Manakeesh",
+          "price": 153
+        },
+        {
+          "name": "Nutella Manakeesh",
+          "price": 170
+        },
+        {
+          "name": "Nutella Banana Manakeesh",
+          "price": 185
+        },
+        {
+          "name": "Kofta Arayes",
+          "price": 210
+        },
+        {
+          "name": "Spinach Pastries",
+          "price": 125
+        },
+        {
+          "name": "Plain Labneh Manousheh",
+          "price": 155
+        },
+        {
+          "name": "Half Labneh Half Zaatar Manousheh",
+          "price": 170
+        },
+        {
+          "name": "Sausage & Cheese Manousheh",
+          "price": 225
+        },
+        {
+          "name": "Chicken Shawarma & Cheese Manousheh",
+          "price": 193
+        },
+        {
+          "name": "Beef Shawarma & Cheese Manousheh",
+          "price": 215
+        },
+        {
+          "name": "Labneh & Honey Manousheh",
+          "price": 195
+        },
+        {
+          "name": "Sweet Strawberry Manousheh",
+          "price": 185
+        }
+      ]
+    },
+    {
+      "name": "Egg Pastries",
+      "items": [
+        {
+          "name": "Sunny Side Eggs",
+          "price": 95
+        },
+        {
+          "name": "Eggs & Cheese",
+          "price": 105
+        },
+        {
+          "name": "Shakshuka Eggs",
+          "price": 125
+        }
+      ]
+    }
+  ]
+}
