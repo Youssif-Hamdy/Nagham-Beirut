@@ -1,15 +1,22 @@
 require("dotenv").config();
-const express = require("express");
-const mongoose = require("mongoose");
-const swaggerUi = require("swagger-ui-express");
+const express    = require("express");
+const mongoose   = require("mongoose");
+const cors       = require("cors");
+const swaggerUi  = require("swagger-ui-express");
 const swaggerFile = require("./config/swagger-output.json");
-const menuRoutes = require("./routes/menuRoutes");
 
-const app = express();
-const PORT = process.env.PORT || 3000;
+const menuRoutes       = require("./routes/menuRoutes");
+const employeeRoutes   = require("./routes/employeeRoutes");
+const roleRoutes       = require("./routes/roleRoutes");
+const departmentRoutes = require("./routes/departmentRoutes");
+const errorHandler     = require("./middlewares/errorHandler");
+
+const app      = express();
+const PORT     = process.env.PORT || 3000;
 const MONGO_URI = process.env.MONGO_URI;
 
 // ─── Middleware ───────────────────────────────
+app.use(cors({ origin: "*" }));
 app.use(express.json());
 
 // ─── Swagger UI ───────────────────────────────
@@ -20,8 +27,12 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerFile, {
     "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.11.0/swagger-ui-standalone-preset.min.js",
   ],
 }));
+
 // ─── Routes ───────────────────────────────────
-app.use("/api/menu", menuRoutes);
+app.use("/api/menu",        menuRoutes);
+app.use("/api/employees",   employeeRoutes);
+app.use("/api/roles",       roleRoutes);
+app.use("/api/departments", departmentRoutes);
 
 // ─── Root ─────────────────────────────────────
 app.get("/", (req, res) => {
@@ -29,15 +40,16 @@ app.get("/", (req, res) => {
     message: "🍽️  Nagham Menu API is running",
     docs: `http://localhost:${PORT}/api-docs`,
     endpoints: {
-      getAllMenus: "GET  /api/menu",
-      getMenuByLang: "GET  /api/menu/:lang (en | ar)",
-      getItem: "GET  /api/menu/:lang/items/:itemId",
-      addItem: "POST /api/menu/:lang/items",
-      updateItem: "PUT  /api/menu/:lang/items/:itemId",
-      deleteItem: "DELETE /api/menu/:lang/items/:itemId",
+      menu:        "GET  /api/menu",
+      employees:   "GET  /api/employees",
+      roles:       "GET  /api/roles",
+      departments: "GET  /api/departments",
     },
   });
 });
+
+// ─── Error Handler ────────────────────────────
+app.use(errorHandler);
 
 // ─── 404 Handler ──────────────────────────────
 app.use((req, res) => {

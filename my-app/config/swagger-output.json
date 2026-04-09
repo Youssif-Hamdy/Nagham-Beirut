@@ -2,13 +2,30 @@
   "swagger": "2.0",
   "info": {
     "title": "Nagham Menu API",
-    "description": "REST API for managing the restaurant menu (English & Arabic)",
+    "description": "API documentation for Menu & Employee management",
     "version": "1.0.0"
   },
-  "host": "nagham-beirut.vercel.app",
-  "basePath": "/api/menu",
+  "host": "localhost:3000",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Menu",
+      "description": "Menu endpoints"
+    },
+    {
+      "name": "Employees",
+      "description": "Employee endpoints"
+    },
+    {
+      "name": "Roles",
+      "description": "Role endpoints"
+    },
+    {
+      "name": "Departments",
+      "description": "Department endpoints"
+    }
+  ],
   "schemes": [
-    "https",
     "http"
   ],
   "paths": {
@@ -21,6 +38,14 @@
           },
           "500": {
             "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "description": "",
+        "responses": {
+          "201": {
+            "description": "Created"
           }
         }
       }
@@ -203,6 +228,65 @@
           },
           "500": {
             "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/{id}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       }
