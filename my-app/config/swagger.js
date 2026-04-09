@@ -1,15 +1,19 @@
-const swaggerAutogen = require("swagger-autogen")();
+const swaggerJsdoc = require("swagger-jsdoc");
 
-const doc = {
-  info: {
-    title: "Nagham Menu API",
-    description: "REST API for managing the restaurant menu",
+const options = {
+  definition: {
+    openapi: "3.0.0",
+    info: {
+      title: "Nagham Menu API",
+      version: "1.0.0",
+      description: "REST API for managing the restaurant menu (English & Arabic)",
+    },
+    servers: [
+      { url: "https://nagham-beirut.vercel.app", description: "Production" },
+      { url: "http://localhost:3000", description: "Local" },
+    ],
   },
-  host: "nagham-beirut.vercel.app",
-  schemes: ["https", "http"],
+  apis: ["./routes/*.js"],
 };
 
-const outputFile = "./swagger-output.json";
-const routes = ["./routes/menuRoutes.js"];
-
-swaggerAutogen(outputFile, routes, doc);
+module.exports = swaggerJsdoc(options);
