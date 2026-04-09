@@ -2,7 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const swaggerUi = require("swagger-ui-express");
-const swaggerSpec = require("./config/swagger");
+const swaggerFile = require("./config/swagger-output.json");
 const menuRoutes = require("./routes/menuRoutes");
 
 const app = express();
@@ -13,7 +13,7 @@ const MONGO_URI = process.env.MONGO_URI;
 app.use(express.json());
 
 // ─── Swagger UI ───────────────────────────────
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec, {
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerFile, {
   customCssUrl: "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.11.0/swagger-ui.min.css",
   customJs: [
     "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.11.0/swagger-ui-bundle.min.js",

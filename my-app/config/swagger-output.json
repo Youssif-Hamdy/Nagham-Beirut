@@ -2,11 +2,11 @@
   "swagger": "2.0",
   "info": {
     "title": "Nagham Menu API",
-    "description": "REST API for managing the restaurant menu",
+    "description": "REST API for managing the restaurant menu (English & Arabic)",
     "version": "1.0.0"
   },
   "host": "nagham-beirut.vercel.app",
-  "basePath": "/",
+  "basePath": "/api/menu",
   "schemes": [
     "https",
     "http"
