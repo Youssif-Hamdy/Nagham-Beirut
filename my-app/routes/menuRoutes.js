@@ -31,12 +31,20 @@ const ctrl = require("../controllers/menuController");
  *         uncertain:
  *           type: boolean
  *           description: Whether the item name/price is uncertain
+ *         isOffer:
+ *           type: boolean
+ *           description: Whether the item appears in offers list
+ *         isBestSeller:
+ *           type: boolean
+ *           description: Whether the item appears in best sellers list
  *       example:
  *         _id: "663abc123def456"
  *         name: "Om Ali"
  *         price: 120
  *         description: "Traditional Egyptian bread pudding with cream"
  *         uncertain: false
+ *         isOffer: false
+ *         isBestSeller: true
  *
  *     NewItem:
  *       type: object
@@ -56,12 +64,18 @@ const ctrl = require("../controllers/menuController");
  *           type: string
  *         uncertain:
  *           type: boolean
+ *         isOffer:
+ *           type: boolean
+ *         isBestSeller:
+ *           type: boolean
  *       example:
  *         categoryName: "Desserts"
  *         name: "Kunafa"
  *         price: 85
  *         description: "Sweet cheese pastry with sugar syrup"
  *         uncertain: false
+ *         isOffer: true
+ *         isBestSeller: false
  *
  *     UpdateItem:
  *       type: object
@@ -74,9 +88,14 @@ const ctrl = require("../controllers/menuController");
  *           type: string
  *         uncertain:
  *           type: boolean
+ *         isOffer:
+ *           type: boolean
+ *         isBestSeller:
+ *           type: boolean
  *       example:
  *         price: 95
  *         description: "Updated description here"
+ *         isOffer: true
  */
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -131,6 +150,84 @@ router.get("/", ctrl.getAllMenus);
  *         description: Menu not found
  */
 router.get("/:lang", ctrl.getMenuByLang);
+
+/**
+ * @swagger
+ * /api/menu/{lang}/offers:
+ *   get:
+ *     summary: Get menu offers by language
+ *     tags: [Menu]
+ *     parameters:
+ *       - in: path
+ *         name: lang
+ *         required: true
+ *         schema:
+ *           type: string
+ *           enum: [en, ar]
+ *     responses:
+ *       200:
+ *         description: Offers list
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                 count:
+ *                   type: integer
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       category:
+ *                         type: string
+ *                       item:
+ *                         $ref: '#/components/schemas/Item'
+ *       404:
+ *         description: Menu not found
+ */
+router.get("/:lang/offers", ctrl.getOffersByLang);
+
+/**
+ * @swagger
+ * /api/menu/{lang}/best-sellers:
+ *   get:
+ *     summary: Get best sellers by language
+ *     tags: [Menu]
+ *     parameters:
+ *       - in: path
+ *         name: lang
+ *         required: true
+ *         schema:
+ *           type: string
+ *           enum: [en, ar]
+ *     responses:
+ *       200:
+ *         description: Best sellers list
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                 count:
+ *                   type: integer
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       category:
+ *                         type: string
+ *                       item:
+ *                         $ref: '#/components/schemas/Item'
+ *       404:
+ *         description: Menu not found
+ */
+router.get("/:lang/best-sellers", ctrl.getBestSellersByLang);
 
 // ─────────────────────────────────────────────────────────────────────────────
 // GET SINGLE ITEM BY ID

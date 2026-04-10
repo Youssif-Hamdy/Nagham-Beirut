@@ -22,6 +22,14 @@ const itemSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    isOffer: {
+      type: Boolean,
+      default: false,
+    },
+    isBestSeller: {
+      type: Boolean,
+      default: false,
+    },
   },
   { _id: true }
 );

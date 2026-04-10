@@ -41,6 +41,8 @@ app.get("/", (req, res) => {
     docs: `http://localhost:${PORT}/api-docs`,
     endpoints: {
       menu:        "GET  /api/menu",
+      menuOffers:  "GET  /api/menu/:lang/offers",
+      bestSellers: "GET  /api/menu/:lang/best-sellers",
       employees:   "GET  /api/employees",
       roles:       "GET  /api/roles",
       departments: "GET  /api/departments",

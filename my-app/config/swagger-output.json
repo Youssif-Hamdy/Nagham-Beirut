@@ -2,61 +2,287 @@
   "swagger": "2.0",
   "info": {
     "title": "Nagham Menu API",
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "description": ""
   },
   "host": "nagham-beirut.vercel.app",
-  "schemes": ["https"],
+  "basePath": "/",
   "tags": [
-    { "name": "Menu",        "description": "Menu endpoints" },
-    { "name": "Employees",   "description": "Employee endpoints" },
-    { "name": "Roles",       "description": "Role endpoints" },
-    { "name": "Departments", "description": "Department endpoints" }
+    {
+      "name": "Menu",
+      "description": "Menu endpoints"
+    },
+    {
+      "name": "Employees",
+      "description": "Employee endpoints"
+    },
+    {
+      "name": "Roles",
+      "description": "Role endpoints"
+    },
+    {
+      "name": "Departments",
+      "description": "Department endpoints"
+    }
+  ],
+  "schemes": [
+    "https"
   ],
   "paths": {
-    "/api/menu": {
-      "get":  { "tags": ["Menu"], "summary": "Get all menus",    "responses": { "200": { "description": "OK" } } },
-      "post": { "tags": ["Menu"], "summary": "Create menu item", "parameters": [{ "in": "body", "name": "body", "required": true, "schema": { "type": "object" } }], "responses": { "201": { "description": "Created" } } }
+    "/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
     },
-    "/api/menu/{lang}": {
-      "get": { "tags": ["Menu"], "summary": "Get menu by language", "parameters": [{ "in": "path", "name": "lang", "required": true, "type": "string", "enum": ["en","ar"] }], "responses": { "200": { "description": "OK" } } }
-    },
-    "/api/menu/{lang}/items/{itemId}": {
-      "get":    { "tags": ["Menu"], "summary": "Get item",    "parameters": [{ "in": "path", "name": "lang", "required": true, "type": "string" }, { "in": "path", "name": "itemId", "required": true, "type": "string" }], "responses": { "200": { "description": "OK" } } },
-      "put":    { "tags": ["Menu"], "summary": "Update item", "parameters": [{ "in": "path", "name": "lang", "required": true, "type": "string" }, { "in": "path", "name": "itemId", "required": true, "type": "string" }, { "in": "body", "name": "body", "schema": { "type": "object" } }], "responses": { "200": { "description": "Updated" } } },
-      "delete": { "tags": ["Menu"], "summary": "Delete item", "parameters": [{ "in": "path", "name": "lang", "required": true, "type": "string" }, { "in": "path", "name": "itemId", "required": true, "type": "string" }], "responses": { "200": { "description": "Deleted" } } }
-    },
-    "/api/employees": {
-      "get":  { "tags": ["Employees"], "summary": "Get all employees", "responses": { "200": { "description": "OK" } } },
-      "post": { "tags": ["Employees"], "summary": "Create employee",
-        "parameters": [{ "in": "body", "name": "body", "required": true, "schema": { "type": "object", "properties": {
-          "name":       { "type": "string",  "example": "Ahmed Ali" },
-          "phone":      { "type": "string",  "example": "01012345678" },
-          "salary":     { "type": "number",  "example": 5000 },
-          "role":       { "type": "string",  "example": "64f1a2b3c4d5e6f7a8b9c0d1" },
-          "department": { "type": "string",  "example": "64f1a2b3c4d5e6f7a8b9c0d2" }
-        }}}],
-        "responses": { "201": { "description": "Created" } } }
-    },
-    "/api/employees/{id}": {
-      "get":    { "tags": ["Employees"], "summary": "Get employee by ID", "parameters": [{ "in": "path", "name": "id", "required": true, "type": "string" }], "responses": { "200": { "description": "OK" }, "404": { "description": "Not found" } } },
-      "put":    { "tags": ["Employees"], "summary": "Update employee",
+    "/{lang}": {
+      "get": {
+        "description": "",
         "parameters": [
-          { "in": "path", "name": "id", "required": true, "type": "string" },
-          { "in": "body", "name": "body", "schema": { "type": "object", "properties": {
-            "name": { "type": "string" }, "phone": { "type": "string" },
-            "salary": { "type": "number" }, "role": { "type": "string" }, "department": { "type": "string" }
-          }}}
+          {
+            "name": "lang",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
         ],
-        "responses": { "200": { "description": "Updated" }, "404": { "description": "Not found" } } },
-      "delete": { "tags": ["Employees"], "summary": "Delete employee", "parameters": [{ "in": "path", "name": "id", "required": true, "type": "string" }], "responses": { "200": { "description": "Deleted" }, "404": { "description": "Not found" } } }
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
     },
-    "/api/roles": {
-      "get":  { "tags": ["Roles"], "summary": "Get all roles", "responses": { "200": { "description": "OK" } } },
-      "post": { "tags": ["Roles"], "summary": "Create role", "parameters": [{ "in": "body", "name": "body", "required": true, "schema": { "type": "object", "properties": { "name": { "type": "string", "example": "Waiter" } } }}], "responses": { "201": { "description": "Created" } } }
+    "/{lang}/offers": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "lang",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
     },
-    "/api/departments": {
-      "get":  { "tags": ["Departments"], "summary": "Get all departments", "responses": { "200": { "description": "OK" } } },
-      "post": { "tags": ["Departments"], "summary": "Create department", "parameters": [{ "in": "body", "name": "body", "required": true, "schema": { "type": "object", "properties": { "name": { "type": "string", "example": "FOH" } } }}], "responses": { "201": { "description": "Created" } } }
+    "/{lang}/best-sellers": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "lang",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/{lang}/items/{itemId}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "lang",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "itemId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "lang",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "itemId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "any"
+                },
+                "price": {
+                  "example": "any"
+                },
+                "description": {
+                  "example": "any"
+                },
+                "uncertain": {
+                  "example": "any"
+                },
+                "isOffer": {
+                  "example": "any"
+                },
+                "isBestSeller": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "lang",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "itemId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/{lang}/items": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "lang",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "categoryName": {
+                  "example": "any"
+                },
+                "name": {
+                  "example": "any"
+                },
+                "price": {
+                  "example": "any"
+                },
+                "description": {
+                  "example": "any"
+                },
+                "uncertain": {
+                  "example": "any"
+                },
+                "isOffer": {
+                  "example": "any"
+                },
+                "isBestSeller": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
     }
   }
 }

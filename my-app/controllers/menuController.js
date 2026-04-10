@@ -82,7 +82,15 @@ exports.getItemById = async (req, res) => {
 // ─────────────────────────────────────────────
 exports.addItem = async (req, res) => {
   try {
-    const { categoryName, name, price, description, uncertain } = req.body;
+    const {
+      categoryName,
+      name,
+      price,
+      description,
+      uncertain,
+      isOffer,
+      isBestSeller,
+    } = req.body;
 
     if (!categoryName || !name || price === undefined) {
       return res.status(400).json({
@@ -106,7 +114,14 @@ exports.addItem = async (req, res) => {
       category = menu.categories[menu.categories.length - 1];
     }
 
-    const newItem = { name, price, description: description || "", uncertain: uncertain || false };
+    const newItem = {
+      name,
+      price,
+      description: description || "",
+      uncertain: uncertain || false,
+      isOffer: isOffer || false,
+      isBestSeller: isBestSeller || false,
+    };
     category.items.push(newItem);
 
     await menu.save();
@@ -144,14 +159,82 @@ exports.updateItem = async (req, res) => {
       return res.status(404).json({ success: false, message: "Item not found" });
     }
 
-    const { name, price, description, uncertain } = req.body;
+    const { name, price, description, uncertain, isOffer, isBestSeller } = req.body;
     if (name !== undefined) foundItem.name = name;
     if (price !== undefined) foundItem.price = price;
     if (description !== undefined) foundItem.description = description;
     if (uncertain !== undefined) foundItem.uncertain = uncertain;
+    if (isOffer !== undefined) foundItem.isOffer = isOffer;
+    if (isBestSeller !== undefined) foundItem.isBestSeller = isBestSeller;
 
     await menu.save();
     res.status(200).json({ success: true, data: foundItem });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+};
+
+// ─────────────────────────────────────────────
+// GET /api/menu/:lang/offers
+// Returns all items marked as offers
+// ─────────────────────────────────────────────
+exports.getOffersByLang = async (req, res) => {
+  try {
+    const menu = await Menu.findOne({ language: req.params.lang });
+    if (!menu) {
+      return res.status(404).json({
+        success: false,
+        message: `No menu found for language: ${req.params.lang}`,
+      });
+    }
+
+    const offers = [];
+    for (const category of menu.categories) {
+      for (const item of category.items) {
+        if (item.isOffer) {
+          offers.push({ category: category.name, item });
+        }
+      }
+    }
+
+    res.status(200).json({
+      success: true,
+      count: offers.length,
+      data: offers,
+    });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+};
+
+// ─────────────────────────────────────────────
+// GET /api/menu/:lang/best-sellers
+// Returns all items marked as best sellers
+// ─────────────────────────────────────────────
+exports.getBestSellersByLang = async (req, res) => {
+  try {
+    const menu = await Menu.findOne({ language: req.params.lang });
+    if (!menu) {
+      return res.status(404).json({
+        success: false,
+        message: `No menu found for language: ${req.params.lang}`,
+      });
+    }
+
+    const bestSellers = [];
+    for (const category of menu.categories) {
+      for (const item of category.items) {
+        if (item.isBestSeller) {
+          bestSellers.push({ category: category.name, item });
+        }
+      }
+    }
+
+    res.status(200).json({
+      success: true,
+      count: bestSellers.length,
+      data: bestSellers,
+    });
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
   }
