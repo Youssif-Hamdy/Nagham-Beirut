@@ -42,8 +42,10 @@ app.get("/", (req, res) => {
     message: "🍽️  Nagham Menu API is running",
     docs: `http://localhost:${PORT}/api-docs`,
     auth: {
-      register: "POST /api/auth/register",
-      login: "POST /api/auth/login",
+      register_employee: "POST /api/auth/register (name, phone, password, ...)",
+      register_user: "POST /api/auth/register (name, password)",
+      login_employee: "POST /api/auth/login (phone, password)",
+      login_user: "POST /api/auth/login (name, password)",
     },
     endpoints: {
       menu:        "GET  /api/menu",
