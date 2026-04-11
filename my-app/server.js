@@ -34,7 +34,7 @@ app.use("/api/menu",        menuRoutes);
 app.use("/api/employees",   employeeRoutes);
 app.use("/api/roles",       roleRoutes);
 app.use("/api/departments", departmentRoutes);
-app.use("/auth",            authRoutes);
+app.use("/api/auth",        authRoutes);
 
 // ─── Root ─────────────────────────────────────
 app.get("/", (req, res) => {
@@ -42,8 +42,8 @@ app.get("/", (req, res) => {
     message: "🍽️  Nagham Menu API is running",
     docs: `http://localhost:${PORT}/api-docs`,
     auth: {
-      register: "POST /auth/register",
-      login: "POST /auth/login",
+      register: "POST /api/auth/register",
+      login: "POST /api/auth/login",
     },
     endpoints: {
       menu:        "GET  /api/menu",
