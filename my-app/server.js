@@ -9,6 +9,7 @@ const menuRoutes       = require("./routes/menuRoutes");
 const employeeRoutes   = require("./routes/employeeRoutes");
 const roleRoutes       = require("./routes/roleRoutes");
 const departmentRoutes = require("./routes/departmentRoutes");
+const authRoutes       = require("./routes/authRoutes");
 const errorHandler     = require("./middlewares/errorHandler");
 
 const app      = express();
@@ -33,17 +34,22 @@ app.use("/api/menu",        menuRoutes);
 app.use("/api/employees",   employeeRoutes);
 app.use("/api/roles",       roleRoutes);
 app.use("/api/departments", departmentRoutes);
+app.use("/auth",            authRoutes);
 
 // ─── Root ─────────────────────────────────────
 app.get("/", (req, res) => {
   res.json({
     message: "🍽️  Nagham Menu API is running",
     docs: `http://localhost:${PORT}/api-docs`,
+    auth: {
+      register: "POST /auth/register",
+      login: "POST /auth/login",
+    },
     endpoints: {
       menu:        "GET  /api/menu",
       menuOffers:  "GET  /api/menu/:lang/offers",
       bestSellers: "GET  /api/menu/:lang/best-sellers",
-      employees:   "GET  /api/employees",
+      employees:   "GET  /api/employees (requires auth)",
       roles:       "GET  /api/roles",
       departments: "GET  /api/departments",
     },
