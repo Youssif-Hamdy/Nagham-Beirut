@@ -17,7 +17,9 @@ exports.register = asyncHandler(async (req, res) => {
   const { name, phone, password, salary, role, department } = req.body;
 
   if (!name || !password) {
-    return res.status(400).json({ success: false, message: "name and password are required" });
+    return res
+      .status(400)
+      .json({ success: false, message: "name and password are required" });
   }
 
   // لو في phone = موظف، لو مش في = مستخدم عام
@@ -30,8 +32,13 @@ exports.register = asyncHandler(async (req, res) => {
 
     if (roleId) {
       if (typeof roleId === "string" && roleId.length < 24) {
-        const roleDoc = await Role.findOne({ name: new RegExp(`^${roleId}$`, "i") });
-        if (!roleDoc) return res.status(400).json({ success: false, message: `Role "${roleId}" مش موجود` });
+        const roleDoc = await Role.findOne({
+          name: new RegExp(`^${roleId}$`, "i"),
+        });
+        if (!roleDoc)
+          return res
+            .status(400)
+            .json({ success: false, message: `Role "${roleId}" مش موجود` });
         roleId = roleDoc._id;
       }
     } else {
@@ -42,44 +49,56 @@ exports.register = asyncHandler(async (req, res) => {
 
     if (departmentId) {
       if (typeof departmentId === "string" && departmentId.length < 24) {
-        const deptDoc = await Department.findOne({ name: new RegExp(`^${departmentId}$`, "i") });
-        if (!deptDoc) return res.status(400).json({ success: false, message: `Department "${departmentId}" مش موجود` });
+        const deptDoc = await Department.findOne({
+          name: new RegExp(`^${departmentId}$`, "i"),
+        });
+        if (!deptDoc)
+          return res
+            .status(400)
+            .json({
+              success: false,
+              message: `Department "${departmentId}" مش موجود`,
+            });
         departmentId = deptDoc._id;
       }
     } else {
-      let deptDoc = await Department.findOne({ name: new RegExp("^General$", "i") });
+      let deptDoc = await Department.findOne({
+        name: new RegExp("^General$", "i"),
+      });
       if (!deptDoc) deptDoc = await Department.create({ name: "General" });
       departmentId = deptDoc._id;
     }
 
-    const employee = await Employee.create({ 
-      name, 
-      phone, 
-      password, 
+    const employee = await Employee.create({
+      name,
+      phone,
+      password,
       salary: salary ?? 0,
-      role: roleId, 
-      department: departmentId 
+      role: roleId,
+      department: departmentId,
     });
 
-    res.status(201).json({ 
-      success: true, 
+    res.status(201).json({
+      success: true,
       data: employee,
       token: generateToken(employee._id),
-      type: "employee"
+      type: "employee",
     });
   } else {
     // Register User
     const existingUser = await User.findOne({ name });
     if (existingUser) {
-      return res.status(400).json({ success: false, message: "User already exists" });
+      return res
+        .status(400)
+        .json({ success: false, message: "User already exists" });
     }
 
     const user = await User.create({ name, password });
-    res.status(201).json({ 
-      success: true, 
-      data: { id: user._id, name: user.name }, 
+    res.status(201).json({
+      success: true,
+      data: { id: user._id, name: user.name },
       token: generateToken(user._id),
-      type: "user"
+      type: "user",
     });
   }
 });
@@ -88,24 +107,30 @@ exports.login = asyncHandler(async (req, res) => {
   const { name, phone, password } = req.body;
 
   if (!password) {
-    return res.status(400).json({ success: false, message: "password is required" });
+    return res
+      .status(400)
+      .json({ success: false, message: "password is required" });
   }
 
   // لو في phone = employee login، لو in name = user login
   if (phone) {
     // Employee Login
     if (!phone) {
-      return res.status(400).json({ success: false, message: "phone is required" });
+      return res
+        .status(400)
+        .json({ success: false, message: "phone is required" });
     }
 
-    const employee = await Employee.findOne({ phone }).populate("role").populate("department");
+    const employee = await Employee.findOne({ phone })
+      .populate("role")
+      .populate("department");
 
     if (employee && (await employee.matchPassword(password))) {
       res.json({
         success: true,
         token: generateToken(employee._id),
         data: employee,
-        type: "employee"
+        type: "employee",
       });
     } else {
       res.status(401).json({ success: false, message: "Invalid credentials" });
@@ -114,17 +139,21 @@ exports.login = asyncHandler(async (req, res) => {
     // User Login
     const user = await User.findOne({ name });
     if (user && (await user.matchPassword(password))) {
-      res.json({ 
-        success: true, 
-        token: generateToken(user._id), 
+      res.json({
+        success: true,
+        token: generateToken(user._id),
         data: { id: user._id, name: user.name },
-        type: "user"
+        type: "user",
       });
     } else {
       res.status(401).json({ success: false, message: "Invalid credentials" });
     }
   } else {
-    res.status(400).json({ success: false, message: "name (user) or phone (employee) is required" });
+    res
+      .status(400)
+      .json({
+        success: false,
+        message: "name (user) or phone (employee) is required",
+      });
   }
 });
-

@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 
-// ===== Item Schema =====
 const itemSchema = new mongoose.Schema(
   {
     name: {
@@ -8,11 +7,11 @@ const itemSchema = new mongoose.Schema(
       required: [true, "Item name is required"],
       trim: true,
     },
-  price: {
-  type: Number,
-  default: 0,
-  min: [0, "Price cannot be negative"],
-},
+    price: {
+      type: Number,
+      default: 0,
+      min: [0, "Price cannot be negative"],
+    },
     description: {
       type: String,
       trim: true,
@@ -26,6 +25,12 @@ const itemSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    offerDiscount: {
+      type: Number,
+      default: 0,
+      min: [0, "Discount cannot be negative"],
+      max: [100, "Discount cannot exceed 100%"],
+    },
     isBestSeller: {
       type: Boolean,
       default: false,
@@ -34,7 +39,6 @@ const itemSchema = new mongoose.Schema(
   { _id: true }
 );
 
-// ===== Category Schema =====
 const categorySchema = new mongoose.Schema(
   {
     name: {
@@ -47,7 +51,6 @@ const categorySchema = new mongoose.Schema(
   { _id: false }
 );
 
-// ===== Menu Schema =====
 const menuSchema = new mongoose.Schema(
   {
     language: {

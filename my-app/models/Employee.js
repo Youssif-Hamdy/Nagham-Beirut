@@ -2,13 +2,17 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 
 const employeeSchema = new mongoose.Schema({
-  name:       { type: String,   required: true },
-  phone:      { type: String,   required: true, unique: true },
-  password:   { type: String,   required: true },
-  salary:     { type: Number,   required: true },
-  role:       { type: mongoose.Schema.Types.ObjectId, ref: "Role",       required: true },
-  department: { type: mongoose.Schema.Types.ObjectId, ref: "Department", required: true },
-  createdAt:  { type: Date, default: Date.now },
+  name: { type: String, required: true },
+  phone: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+  salary: { type: Number, required: true },
+  role: { type: mongoose.Schema.Types.ObjectId, ref: "Role", required: true },
+  department: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Department",
+    required: true,
+  },
+  createdAt: { type: Date, default: Date.now },
 });
 
 // Hash password before saving

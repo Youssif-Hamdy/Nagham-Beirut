@@ -1,17 +1,18 @@
 const Menu = require("../models/Menu");
 
+// Helper: يحسب السعر بعد الخصم
+const calcOfferPrice = (price, discount) => {
+  if (!discount || discount <= 0) return price;
+  return parseFloat((price - (price * discount) / 100).toFixed(2));
+};
+
 // ─────────────────────────────────────────────
 // GET /api/menu
-// Returns all menus (en + ar)
 // ─────────────────────────────────────────────
 exports.getAllMenus = async (req, res) => {
   try {
     const menus = await Menu.find();
-    res.status(200).json({
-      success: true,
-      count: menus.length,
-      data: menus,
-    });
+    res.status(200).json({ success: true, count: menus.length, data: menus });
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
   }
@@ -19,7 +20,6 @@ exports.getAllMenus = async (req, res) => {
 
 // ─────────────────────────────────────────────
 // GET /api/menu/:lang
-// Returns menu by language (en or ar)
 // ─────────────────────────────────────────────
 exports.getMenuByLang = async (req, res) => {
   try {
@@ -38,7 +38,6 @@ exports.getMenuByLang = async (req, res) => {
 
 // ─────────────────────────────────────────────
 // GET /api/menu/:lang/items/:itemId
-// Returns a single item by its _id
 // ─────────────────────────────────────────────
 exports.getItemById = async (req, res) => {
   try {
@@ -66,9 +65,14 @@ exports.getItemById = async (req, res) => {
       return res.status(404).json({ success: false, message: "Item not found" });
     }
 
+    const itemObj = foundItem.toObject();
+    if (itemObj.isOffer) {
+      itemObj.offerPrice = calcOfferPrice(itemObj.price, itemObj.offerDiscount);
+    }
+
     res.status(200).json({
       success: true,
-      data: { category: foundCategory, item: foundItem },
+      data: { category: foundCategory, item: itemObj },
     });
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
@@ -77,8 +81,6 @@ exports.getItemById = async (req, res) => {
 
 // ─────────────────────────────────────────────
 // POST /api/menu/:lang/items
-// Add a new item to a category
-// Body: { categoryName, name, price, description, uncertain }
 // ─────────────────────────────────────────────
 exports.addItem = async (req, res) => {
   try {
@@ -89,6 +91,7 @@ exports.addItem = async (req, res) => {
       description,
       uncertain,
       isOffer,
+      offerDiscount,
       isBestSeller,
     } = req.body;
 
@@ -107,7 +110,6 @@ exports.addItem = async (req, res) => {
       });
     }
 
-    // Find or create category
     let category = menu.categories.find((c) => c.name === categoryName);
     if (!category) {
       menu.categories.push({ name: categoryName, items: [] });
@@ -120,14 +122,17 @@ exports.addItem = async (req, res) => {
       description: description || "",
       uncertain: uncertain || false,
       isOffer: isOffer || false,
+      offerDiscount: isOffer ? (offerDiscount || 0) : 0,
       isBestSeller: isBestSeller || false,
     };
     category.items.push(newItem);
-
     await menu.save();
 
-    // Return the newly added item
-    const savedItem = category.items[category.items.length - 1];
+    const savedItem = category.items[category.items.length - 1].toObject();
+    if (savedItem.isOffer) {
+      savedItem.offerPrice = calcOfferPrice(savedItem.price, savedItem.offerDiscount);
+    }
+
     res.status(201).json({ success: true, data: savedItem });
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
@@ -136,8 +141,6 @@ exports.addItem = async (req, res) => {
 
 // ─────────────────────────────────────────────
 // PUT /api/menu/:lang/items/:itemId
-// Update an item by its _id
-// Body: { name?, price?, description?, uncertain?, categoryName? }
 // ─────────────────────────────────────────────
 exports.updateItem = async (req, res) => {
   try {
@@ -159,16 +162,25 @@ exports.updateItem = async (req, res) => {
       return res.status(404).json({ success: false, message: "Item not found" });
     }
 
-    const { name, price, description, uncertain, isOffer, isBestSeller } = req.body;
+    const { name, price, description, uncertain, isOffer, offerDiscount, isBestSeller } = req.body;
     if (name !== undefined) foundItem.name = name;
     if (price !== undefined) foundItem.price = price;
     if (description !== undefined) foundItem.description = description;
     if (uncertain !== undefined) foundItem.uncertain = uncertain;
     if (isOffer !== undefined) foundItem.isOffer = isOffer;
+    if (offerDiscount !== undefined) foundItem.offerDiscount = offerDiscount;
+    // لو اتحذف الـ offer، امسح الخصم تلقائياً
+    if (isOffer === false) foundItem.offerDiscount = 0;
     if (isBestSeller !== undefined) foundItem.isBestSeller = isBestSeller;
 
     await menu.save();
-    res.status(200).json({ success: true, data: foundItem });
+
+    const itemObj = foundItem.toObject();
+    if (itemObj.isOffer) {
+      itemObj.offerPrice = calcOfferPrice(itemObj.price, itemObj.offerDiscount);
+    }
+
+    res.status(200).json({ success: true, data: itemObj });
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
   }
@@ -176,7 +188,6 @@ exports.updateItem = async (req, res) => {
 
 // ─────────────────────────────────────────────
 // GET /api/menu/:lang/offers
-// Returns all items marked as offers
 // ─────────────────────────────────────────────
 exports.getOffersByLang = async (req, res) => {
   try {
@@ -192,16 +203,14 @@ exports.getOffersByLang = async (req, res) => {
     for (const category of menu.categories) {
       for (const item of category.items) {
         if (item.isOffer) {
-          offers.push({ category: category.name, item });
+          const itemObj = item.toObject();
+          itemObj.offerPrice = calcOfferPrice(itemObj.price, itemObj.offerDiscount);
+          offers.push({ category: category.name, item: itemObj });
         }
       }
     }
 
-    res.status(200).json({
-      success: true,
-      count: offers.length,
-      data: offers,
-    });
+    res.status(200).json({ success: true, count: offers.length, data: offers });
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
   }
@@ -209,7 +218,6 @@ exports.getOffersByLang = async (req, res) => {
 
 // ─────────────────────────────────────────────
 // GET /api/menu/:lang/best-sellers
-// Returns all items marked as best sellers
 // ─────────────────────────────────────────────
 exports.getBestSellersByLang = async (req, res) => {
   try {
@@ -225,16 +233,16 @@ exports.getBestSellersByLang = async (req, res) => {
     for (const category of menu.categories) {
       for (const item of category.items) {
         if (item.isBestSeller) {
-          bestSellers.push({ category: category.name, item });
+          const itemObj = item.toObject();
+          if (itemObj.isOffer) {
+            itemObj.offerPrice = calcOfferPrice(itemObj.price, itemObj.offerDiscount);
+          }
+          bestSellers.push({ category: category.name, item: itemObj });
         }
       }
     }
 
-    res.status(200).json({
-      success: true,
-      count: bestSellers.length,
-      data: bestSellers,
-    });
+    res.status(200).json({ success: true, count: bestSellers.length, data: bestSellers });
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
   }
@@ -242,7 +250,6 @@ exports.getBestSellersByLang = async (req, res) => {
 
 // ─────────────────────────────────────────────
 // DELETE /api/menu/:lang/items/:itemId
-// Delete an item by its _id
 // ─────────────────────────────────────────────
 exports.deleteItem = async (req, res) => {
   try {
