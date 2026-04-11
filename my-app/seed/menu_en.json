@@ -45,7 +45,7 @@
           "price": 120
         },
         {
-          "name": "Naam Lava",
+          "name": "Nagham Lava",
           "price": 135
         },
         {
@@ -54,7 +54,7 @@
           "uncertain": true
         },
         {
-          "name": "Naam Crepe",
+          "name": "Nagham Crepe",
           "price": 165
         },
         {
@@ -105,7 +105,7 @@
           "price": 430
         },
         {
-          "name": "هفيس جريل نعم 450 جرام",
+          "name": "هفيس جريل نغم 450 جرام",
           "price": 495,
           "uncertain": true
         },
@@ -118,7 +118,7 @@
           "price": 530
         },
         {
-          "name": "كفتة نعم بيروت 300 جرام",
+          "name": "كفتة نغم بيروت 300 جرام",
           "price": 395
         },
         {
@@ -144,7 +144,7 @@
           "uncertain": true
         },
         {
-          "name": "شيش حلوم نعم 300 جرام",
+          "name": "شيش حلوم نغم 300 جرام",
           "price": 325
         },
         {
@@ -220,7 +220,7 @@
           "price": 330
         },
         {
-          "name": "سودة نعم",
+          "name": "سودة نغم",
           "price": 165
         },
         {
@@ -245,7 +245,7 @@
         }
       ],
       "combo": {
-        "name": "Naam Appetizer Mix",
+        "name": "Nagham Appetizer Mix",
         "price": 275
       }
     },
@@ -938,7 +938,7 @@
           "price": 57
         },
         {
-          "name": "Naam Raheb",
+          "name": "Nagham Raheb",
           "price": 91
         },
         {
@@ -950,7 +950,7 @@
           "price": 96
         },
         {
-          "name": "Naam Beirut Salad",
+          "name": "Nagham Beirut Salad",
           "price": 91
         },
         {
@@ -991,7 +991,7 @@
           "price": 165
         },
         {
-          "name": "Mini Naam Mix Bites",
+          "name": "Mini Nagham Mix Bites",
           "price": 175
         },
         {
