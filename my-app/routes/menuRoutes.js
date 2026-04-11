@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const ctrl = require("../controllers/menuController");
+const auth = require("../middlewares/auth");
 
 /**
  * @swagger
@@ -314,7 +315,7 @@ router.get("/:lang/items/:itemId", ctrl.getItemById);
  *       404:
  *         description: Menu not found
  */
-router.post("/:lang/items", ctrl.addItem);
+router.post("/:lang/items", auth, ctrl.addItem);
 
 // ─────────────────────────────────────────────────────────────────────────────
 // PUT - UPDATE ITEM
@@ -360,7 +361,7 @@ router.post("/:lang/items", ctrl.addItem);
  *       404:
  *         description: Menu or Item not found
  */
-router.put("/:lang/items/:itemId", ctrl.updateItem);
+router.put("/:lang/items/:itemId", auth, ctrl.updateItem);
 
 // ─────────────────────────────────────────────────────────────────────────────
 // DELETE - DELETE ITEM
@@ -391,6 +392,6 @@ router.put("/:lang/items/:itemId", ctrl.updateItem);
  *       404:
  *         description: Menu or Item not found
  */
-router.delete("/:lang/items/:itemId", ctrl.deleteItem);
+router.delete("/:lang/items/:itemId", auth, ctrl.deleteItem);
 
 module.exports = router;
