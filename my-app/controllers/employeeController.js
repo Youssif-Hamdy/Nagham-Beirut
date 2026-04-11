@@ -17,9 +17,12 @@ exports.getEmployee = asyncHandler(async (req, res) => {
 exports.createEmployee = asyncHandler(async (req, res) => {
   let { name, phone, password, salary, role, department } = req.body;
 
-  if (!name || !phone || !password) {
-    return res.status(400).json({ success: false, message: "name, phone, and password are required" });
+  if (!name || !phone) {
+    return res.status(400).json({ success: false, message: "name and phone are required" });
   }
+
+  // password اختياري - افتراضي: phone
+  password = password || phone;
 
   // معالجة role
   if (role) {
