@@ -61,7 +61,7 @@ exports.register = asyncHandler(async (req, res) => {
       department: departmentId 
     });
 
-    const populatedEmployee = await employee.populate("role").populate("department");
+    const populatedEmployee = await Employee.findById(employee._id).populate("role").populate("department");
 
     res.status(201).json({ 
       success: true, 

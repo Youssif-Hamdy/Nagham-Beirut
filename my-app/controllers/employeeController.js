@@ -65,7 +65,7 @@ exports.createEmployee = asyncHandler(async (req, res) => {
   }
 
   const employee = await Employee.create({ name, phone, password, salary: salary ?? 3000, role, department });
-  const populatedEmployee = await employee.populate("role").populate("department");
+  const populatedEmployee = await Employee.findById(employee._id).populate("role").populate("department");
   res.status(201).json({ success: true, data: populatedEmployee });
 });
 
