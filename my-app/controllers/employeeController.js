@@ -2,7 +2,6 @@ const Employee   = require("../models/Employee");
 const Role       = require("../models/Role");
 const Department = require("../models/Department");
 const asyncHandler = require("../utils/asyncHandler");
-const jwt = require("jsonwebtoken");
 
 exports.getEmployees = asyncHandler(async (req, res) => {
   const employees = await Employee.find().populate("role").populate("department");
@@ -13,60 +12,6 @@ exports.getEmployee = asyncHandler(async (req, res) => {
   const employee = await Employee.findById(req.params.id).populate("role").populate("department");
   if (!employee) return res.status(404).json({ success: false, message: "Employee not found" });
   res.json({ success: true, data: employee });
-});
-
-exports.register = asyncHandler(async (req, res) => {
-  let { name, phone, password, salary, role, department } = req.body;
-
-  if (!phone || !password) {
-    return res.status(400).json({ success: false, message: "phone and password are required" });
-  }
-
-  name = name || phone;
-  salary = salary ?? 0;
-
-  if (role) {
-    if (typeof role === "string" && role.length < 24) {
-      const roleDoc = await Role.findOne({ name: new RegExp(`^${role}$`, "i") });
-      if (!roleDoc) return res.status(400).json({ success: false, message: `Role "${role}" مش موجود` });
-      role = roleDoc._id;
-    }
-  } else {
-    let roleDoc = await Role.findOne({ name: new RegExp("^User$", "i") });
-    if (!roleDoc) roleDoc = await Role.create({ name: "User" });
-    role = roleDoc._id;
-  }
-
-  if (department) {
-    if (typeof department === "string" && department.length < 24) {
-      const deptDoc = await Department.findOne({ name: new RegExp(`^${department}$`, "i") });
-      if (!deptDoc) return res.status(400).json({ success: false, message: `Department "${department}" مش موجود` });
-      department = deptDoc._id;
-    }
-  } else {
-    let deptDoc = await Department.findOne({ name: new RegExp("^General$", "i") });
-    if (!deptDoc) deptDoc = await Department.create({ name: "General" });
-    department = deptDoc._id;
-  }
-
-  const employee = await Employee.create({ name, phone, password, salary, role, department });
-  res.status(201).json({ success: true, data: employee });
-});
-
-exports.login = asyncHandler(async (req, res) => {
-  const { phone, password } = req.body;
-
-  const employee = await Employee.findOne({ phone });
-
-  if (employee && (await employee.matchPassword(password))) {
-    res.json({
-      success: true,
-      token: jwt.sign({ id: employee._id }, process.env.JWT_SECRET, { expiresIn: "30d" }),
-      data: employee,
-    });
-  } else {
-    res.status(401).json({ success: false, message: "Invalid credentials" });
-  }
 });
 
 exports.createEmployee = asyncHandler(async (req, res) => {

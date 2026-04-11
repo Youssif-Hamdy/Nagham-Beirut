@@ -1,18 +1,18 @@
 const express = require("express");
 const router = express.Router();
-const { register, login } = require("../controllers/employeeController");
+const { register, login } = require("../controllers/authController");
 
 router.post("/register", /* #swagger.tags = ['Auth'] */
   /* #swagger.parameters['body'] = {
     in: 'body', required: true,
-    schema: { name: 'Ahmed Ali', phone: '01012345678', password: 'password', salary: 5000, role: 'ObjectId', department: 'ObjectId' }
+    schema: { name: 'Ahmed Ali', password: 'password' }
   } */
   register);
 
 router.post("/login", /* #swagger.tags = ['Auth'] */
   /* #swagger.parameters['body'] = {
     in: 'body', required: true,
-    schema: { phone: '01012345678', password: 'password' }
+    schema: { name: 'Ahmed Ali', password: 'password' }
   } */
   login);
 

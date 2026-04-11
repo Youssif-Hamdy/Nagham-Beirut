@@ -12,13 +12,13 @@ router.post("/",   /* #swagger.tags = ['Employees'] */
     in: 'body', required: true,
     schema: { name: 'Ahmed Ali', phone: '01012345678', password: 'password', salary: 5000, role: 'ObjectId', department: 'ObjectId' }
   } */
-  createEmployee);
+  auth, createEmployee);
 router.put("/:id", /* #swagger.tags = ['Employees'] */
   /* #swagger.parameters['body'] = {
     in: 'body',
     schema: { name: 'Ahmed Ali', phone: '01012345678', password: 'password', salary: 5000, role: 'ObjectId', department: 'ObjectId' }
   } */
-  updateEmployee);
-router.delete("/:id", /* #swagger.tags = ['Employees'] */ deleteEmployee);
+  auth, updateEmployee);
+router.delete("/:id", /* #swagger.tags = ['Employees'] */ auth, deleteEmployee);
 
 module.exports = router;
