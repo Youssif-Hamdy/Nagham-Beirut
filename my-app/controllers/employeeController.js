@@ -65,7 +65,8 @@ exports.createEmployee = asyncHandler(async (req, res) => {
   }
 
   const employee = await Employee.create({ name, phone, password, salary: salary ?? 3000, role, department });
-  res.status(201).json({ success: true, data: employee });
+  const populatedEmployee = await employee.populate("role").populate("department");
+  res.status(201).json({ success: true, data: populatedEmployee });
 });
 
 exports.updateEmployee = asyncHandler(async (req, res) => {
@@ -103,7 +104,7 @@ exports.updateEmployee = asyncHandler(async (req, res) => {
     req.params.id,
     { ...rest, ...(role && { role }), ...(department && { department }) },
     { new: true, runValidators: true }
-  );
+  ).populate("role").populate("department");
   if (!employee) return res.status(404).json({ success: false, message: "Employee not found" });
   res.json({ success: true, data: employee });
 });
