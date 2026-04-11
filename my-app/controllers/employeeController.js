@@ -17,36 +17,83 @@ exports.getEmployee = asyncHandler(async (req, res) => {
 exports.createEmployee = asyncHandler(async (req, res) => {
   let { name, phone, password, salary, role, department } = req.body;
 
-  // لو بعتلي اسم بدل ID — ابحث تلقائياً
-  if (role && typeof role === "string" && role.length < 24) {
-    const roleDoc = await Role.findOne({ name: new RegExp(`^${role}$`, "i") });
-    if (!roleDoc) return res.status(400).json({ success: false, message: `Role "${role}" مش موجود` });
+  if (!name || !phone || !password) {
+    return res.status(400).json({ success: false, message: "name, phone, and password are required" });
+  }
+
+  // معالجة role
+  if (role) {
+    if (typeof role === "string") {
+      if (role.length === 24 || role.match(/^[0-9a-fA-F]{24}$/)) {
+        // هو ID بالفعل
+        const roleExists = await Role.findById(role);
+        if (!roleExists) return res.status(400).json({ success: false, message: "Role ID not found" });
+      } else {
+        // ابحث عن role باسمه
+        const roleDoc = await Role.findOne({ name: new RegExp(`^${role}$`, "i") });
+        if (!roleDoc) return res.status(400).json({ success: false, message: `Role "${role}" not found` });
+        role = roleDoc._id;
+      }
+    }
+  } else {
+    let roleDoc = await Role.findOne({ name: new RegExp("^User$", "i") });
+    if (!roleDoc) roleDoc = await Role.create({ name: "User" });
     role = roleDoc._id;
   }
 
-  if (department && typeof department === "string" && department.length < 24) {
-    const deptDoc = await Department.findOne({ name: new RegExp(`^${department}$`, "i") });
-    if (!deptDoc) return res.status(400).json({ success: false, message: `Department "${department}" مش موجود` });
+  // معالجة department
+  if (department) {
+    if (typeof department === "string") {
+      if (department.length === 24 || department.match(/^[0-9a-fA-F]{24}$/)) {
+        // هو ID بالفعل
+        const deptExists = await Department.findById(department);
+        if (!deptExists) return res.status(400).json({ success: false, message: "Department ID not found" });
+      } else {
+        // ابحث عن department باسمه
+        const deptDoc = await Department.findOne({ name: new RegExp(`^${department}$`, "i") });
+        if (!deptDoc) return res.status(400).json({ success: false, message: `Department "${department}" not found` });
+        department = deptDoc._id;
+      }
+    }
+  } else {
+    let deptDoc = await Department.findOne({ name: new RegExp("^General$", "i") });
+    if (!deptDoc) deptDoc = await Department.create({ name: "General" });
     department = deptDoc._id;
   }
 
-  const employee = await Employee.create({ name, phone, password, salary, role, department });
+  const employee = await Employee.create({ name, phone, password, salary: salary ?? 3000, role, department });
   res.status(201).json({ success: true, data: employee });
 });
 
 exports.updateEmployee = asyncHandler(async (req, res) => {
   let { role, department, ...rest } = req.body;
 
-  if (role && typeof role === "string" && role.length < 24) {
-    const roleDoc = await Role.findOne({ name: new RegExp(`^${role}$`, "i") });
-    if (!roleDoc) return res.status(400).json({ success: false, message: `Role "${role}" مش موجود` });
-    role = roleDoc._id;
+  // معالجة role
+  if (role) {
+    if (typeof role === "string") {
+      if (role.length === 24 || role.match(/^[0-9a-fA-F]{24}$/)) {
+        const roleExists = await Role.findById(role);
+        if (!roleExists) return res.status(400).json({ success: false, message: "Role ID not found" });
+      } else {
+        const roleDoc = await Role.findOne({ name: new RegExp(`^${role}$`, "i") });
+        if (!roleDoc) return res.status(400).json({ success: false, message: `Role "${role}" not found` });
+        role = roleDoc._id;
+      }
+    }
   }
 
-  if (department && typeof department === "string" && department.length < 24) {
-    const deptDoc = await Department.findOne({ name: new RegExp(`^${department}$`, "i") });
-    if (!deptDoc) return res.status(400).json({ success: false, message: `Department "${department}" مش موجود` });
-    department = deptDoc._id;
+  // معالجة department
+  if (department) {
+    if (typeof department === "string") {
+      if (department.length === 24 || department.match(/^[0-9a-fA-F]{24}$/)) {
+        const deptExists = await Department.findById(department);
+        if (!deptExists) return res.status(400).json({ success: false, message: "Department ID not found" });
+      } else {
+        const deptDoc = await Department.findOne({ name: new RegExp(`^${department}$`, "i") });
+        if (!deptDoc) return res.status(400).json({ success: false, message: `Department "${department}" not found` });
+        department = deptDoc._id;
+      }
+    }
   }
 
   const employee = await Employee.findByIdAndUpdate(
