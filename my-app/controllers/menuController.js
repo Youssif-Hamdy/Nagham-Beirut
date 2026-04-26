@@ -181,6 +181,41 @@ exports.uploadCategoryImage = async (req, res) => {
 };
 
 // ─────────────────────────────────────────────
+// PUT /api/menu/:lang/categories/:categoryName/image
+// ─────────────────────────────────────────────
+exports.updateCategoryImage = async (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({ success: false, message: "No image uploaded" });
+    }
+
+    const { lang, categoryName } = req.params;
+
+    const menu = await Menu.findOne({ language: lang });
+    if (!menu) {
+      return res.status(404).json({ success: false, message: `No menu found for language: ${lang}` });
+    }
+
+    const category = menu.categories.find((c) => c.name === categoryName);
+    if (!category) {
+      return res.status(404).json({ success: false, message: "Category not found" });
+    }
+
+    const uploadResponse = await imagekit.upload({
+      file: req.file.buffer,
+      fileName: `category_${categoryName}_${Date.now()}`,
+      folder: "/menu/categories",
+    });
+
+    category.image = uploadResponse.url;
+    await menu.save();
+
+    res.status(200).json({ success: true, imageUrl: uploadResponse.url });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+};
+// ─────────────────────────────────────────────
 // PUT /api/menu/:lang/items/:itemId
 // ─────────────────────────────────────────────
 exports.updateItem = async (req, res) => {

@@ -102,5 +102,6 @@ router.post("/:lang/items", auth, ctrl.addItem);
 router.put("/:lang/items/:itemId", auth, ctrl.updateItem);
 router.delete("/:lang/items/:itemId", auth, ctrl.deleteItem);
 router.post("/:lang/categories/:categoryName/image", auth, upload.single("image"), ctrl.uploadCategoryImage);
+router.put("/:lang/categories/:categoryName/image", auth, upload.single("image"), ctrl.updateCategoryImage);
 
 module.exports = router;
