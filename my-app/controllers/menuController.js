@@ -1,4 +1,7 @@
 const Menu = require("../models/Menu");
+const imagekit = require("../utils/imagekit");
+const multer = require("multer");
+const upload = multer({ storage: multer.memoryStorage() });
 
 // Helper: يحسب السعر بعد الخصم
 const calcOfferPrice = (price, discount) => {
@@ -134,6 +137,44 @@ exports.addItem = async (req, res) => {
     }
 
     res.status(201).json({ success: true, data: savedItem });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+};
+
+
+// ─────────────────────────────────────────────
+// POST /api/menu/:lang/categories/:categoryName/image
+// ─────────────────────────────────────────────
+exports.uploadCategoryImage = async (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({ success: false, message: "No image uploaded" });
+    }
+
+    const { lang, categoryName } = req.params;
+
+    const menu = await Menu.findOne({ language: lang });
+    if (!menu) {
+      return res.status(404).json({ success: false, message: `No menu found for language: ${lang}` });
+    }
+
+    const category = menu.categories.find((c) => c.name === categoryName);
+    if (!category) {
+      return res.status(404).json({ success: false, message: "Category not found" });
+    }
+
+    // Upload to ImageKit
+    const uploadResponse = await imagekit.upload({
+      file: req.file.buffer,
+      fileName: `category_${categoryName}_${Date.now()}`,
+      folder: "/menu/categories",
+    });
+
+    category.image = uploadResponse.url;
+    await menu.save();
+
+    res.status(200).json({ success: true, imageUrl: uploadResponse.url });
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
   }

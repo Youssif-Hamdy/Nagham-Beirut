@@ -46,6 +46,10 @@ const categorySchema = new mongoose.Schema(
       required: [true, "Category name is required"],
       trim: true,
     },
+    image: {
+      type: String,
+      default: "",
+    },
     items: [itemSchema],
   },
   { _id: false }

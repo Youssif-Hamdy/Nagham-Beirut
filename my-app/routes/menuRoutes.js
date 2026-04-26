@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const ctrl = require("../controllers/menuController");
 const auth = require("../middlewares/auth");
+const multer = require("multer");
+const upload = multer({ storage: multer.memoryStorage() });
 
 /**
  * @swagger
@@ -99,5 +101,6 @@ router.get("/:lang/items/:itemId", ctrl.getItemById);
 router.post("/:lang/items", auth, ctrl.addItem);
 router.put("/:lang/items/:itemId", auth, ctrl.updateItem);
 router.delete("/:lang/items/:itemId", auth, ctrl.deleteItem);
+router.post("/:lang/categories/:categoryName/image", auth, upload.single("image"), ctrl.uploadCategoryImage);
 
 module.exports = router;
