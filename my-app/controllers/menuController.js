@@ -190,27 +190,43 @@ exports.updateCategoryImage = async (req, res) => {
     }
 
     const { lang, categoryName } = req.params;
+    const decodedName = decodeURIComponent(categoryName);
 
     const menu = await Menu.findOne({ language: lang });
     if (!menu) {
       return res.status(404).json({ success: false, message: `No menu found for language: ${lang}` });
     }
 
-    const category = menu.categories.find((c) => c.name === categoryName);
-    if (!category) {
-      return res.status(404).json({ success: false, message: "Category not found" });
+    // دور على الـ category بالاسم وجيب الـ index بتاعه
+    const catIndex = menu.categories.findIndex(
+      (c) => c.name.toLowerCase() === decodedName.toLowerCase()
+    );
+    if (catIndex === -1) {
+      return res.status(404).json({ success: false, message: `Category "${decodedName}" not found` });
     }
 
+    // Upload to ImageKit مرة واحدة بس
     const uploadResponse = await imagekit.upload({
       file: req.file.buffer,
-      fileName: `category_${categoryName}_${Date.now()}`,
+      fileName: `category_${decodedName}_${Date.now()}`,
       folder: "/menu/categories",
     });
 
-    category.image = uploadResponse.url;
+    const imageUrl = uploadResponse.url;
+
+    // حدّث الـ lang الحالي
+    menu.categories[catIndex].image = imageUrl;
     await menu.save();
 
-    res.status(200).json({ success: true, imageUrl: uploadResponse.url });
+    // حدّث الـ lang التاني بنفس الـ index
+    const otherLang = lang === "ar" ? "en" : "ar";
+    const otherMenu = await Menu.findOne({ language: otherLang });
+    if (otherMenu && otherMenu.categories[catIndex]) {
+      otherMenu.categories[catIndex].image = imageUrl;
+      await otherMenu.save();
+    }
+
+    res.status(200).json({ success: true, imageUrl });
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
   }
